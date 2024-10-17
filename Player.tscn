@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://duwmlbk0waruu"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_m1l2w"]
+[ext_resource type="Texture2D" uid="uid://c24fb7dlf12jc" path="res://snake_right.bmp" id="2_as5n1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_432qv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_as5n1")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_po7xy"]
+size = Vector2(140, 203)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(-1, 3)
+script = ExtResource("1_m1l2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_432qv")
+animation = &"Jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(14, -5.5)
+shape = SubResource("RectangleShape2D_po7xy")
