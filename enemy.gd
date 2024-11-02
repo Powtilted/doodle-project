@@ -12,7 +12,7 @@ func _process(delta):
 	position.x += speed * direction * delta
 	
 	# Change direction when reaching a certain distance
-	if position.x > 200: # Adjust this value based on your scene
+	if position.x > 200:
 		direction = -1  # Move left
-	elif position.x < 20: # Adjust this value based on your scene
+	elif position.x < 20:
 		direction = 1   # Move right

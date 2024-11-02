@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3rpsvnuriups"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_bt4xx"]
+[ext_resource type="Texture2D" uid="uid://wgcijiabt1p8" path="res://Sprites/projectile-tiles@2x.png" id="2_meto8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pirmy"]
+radius = 13.0
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_bt4xx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_meto8")
+region_enabled = true
+region_rect = Rect2(66.3319, 1.95401, 28.9235, 27.0574)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pirmy")

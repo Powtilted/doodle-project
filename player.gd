@@ -7,6 +7,9 @@ var move_speed = 400
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var nose : Sprite2D = $NoseSprite2D 
 @onready var view_size = get_viewport_rect().size
+@onready var Bullet = preload("res://bullet.tscn")
+
+
 
 func wrapping_screen():
 	position.x = wrapf(position.x, 0, view_size.x)
@@ -16,9 +19,11 @@ func _process(delta):
 	# Apply gravity
 	velocity.y += gravity * delta
 
-	if Input.is_action_pressed("shoot"):
+
+	if Input.is_action_just_pressed("shoot"):
 		anim.play("shoot")
 		nose.visible = true 
+		shoot()
 
 		## Check if left or right is also pressed while shooting
 		if Input.is_action_pressed("move_left"):
@@ -40,12 +45,9 @@ func _process(delta):
 		velocity.x = 0
 		nose.visible = false  # Hide nose when idle
 
-	# Jump when on the ground (this assumes you later have platforms)
 	if is_on_floor():
 		velocity.y = jump_strength
-	# Move the player using the built-in velocity
-	#move_and_slide()
-	
+		
 	var collision = move_and_slide()
 	if collision:
 		var collided_body = get_slide_collision(0).get_collider()
@@ -57,3 +59,7 @@ func die():
 	get_tree().paused = true
 	set_process_input(false)
 	
+func shoot():
+	var bullet = Bullet.instantiate()
+	bullet.position = nose.global_position + Vector2(0, -65)
+	get_parent().add_child(bullet)

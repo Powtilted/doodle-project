@@ -27,9 +27,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_5ukea")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_7y14x")
 }],
 "loop": false,
 "name": &"shoot",
