@@ -1,0 +1,152 @@
+[gd_scene load_steps=15 format=3 uid="uid://b47fcqgb618w"]
+
+[ext_resource type="PackedScene" uid="uid://duwmlbk0waruu" path="res://Player.tscn" id="1_p8ls5"]
+[ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
+[ext_resource type="Texture2D" uid="uid://cso87sjwpnf4k" path="res://Sprites/bridgeLogs.bmp" id="2_ai0q7"]
+[ext_resource type="Texture2D" uid="uid://dqc0bf8mrmq14" path="res://Sprites/bck@2x.png" id="2_oltps"]
+[ext_resource type="Texture2D" uid="uid://bxlw06o1mf61h" path="res://Sprites/jungle-scroller@2x-left.png" id="4_d0w6l"]
+[ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="6_7g018"]
+[ext_resource type="Script" path="res://enemy.gd" id="6_jppji"]
+[ext_resource type="AudioStream" uid="uid://cgqwnkmjdg1k4" path="res://sounds/egg-monster-hit.mp3" id="8_gdnb6"]
+[ext_resource type="Script" path="res://platform_spawner.gd" id="8_idqqb"]
+[ext_resource type="PackedScene" uid="uid://cdhdn6sktfs7u" path="res://Platform.tscn" id="9_40wgg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
+size = Vector2(76, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66jsq"]
+atlas = ExtResource("6_7g018")
+region = Rect2(1023, 0, 193, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spelw"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66jsq")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak5qr"]
+size = Vector2(176, 56)
+
+[node name="main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_p8ls5")]
+position = Vector2(225, 600)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(512, 0)
+limit_left = 0
+limit_right = 640
+script = ExtResource("2_4culv")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("2_oltps")
+centered = false
+offset = Vector2(0, -100)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(0, 0.2)
+motion_mirroring = Vector2(0, 775)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("4_d0w6l")
+centered = false
+offset = Vector2(0, -100)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(0, 0.2)
+motion_mirroring = Vector2(0, 775)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2(1152, 1354)
+rotation = -3.14159
+texture = ExtResource("4_d0w6l")
+centered = false
+offset = Vector2(0, -100)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(226, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 208)
+texture = ExtResource("2_ai0q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1, 229.75)
+shape = SubResource("RectangleShape2D_ru17a")
+one_way_collision = true
+one_way_collision_margin = 2.3
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(300, 487)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(60, 111)
+texture = ExtResource("2_ai0q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(59, 132.75)
+shape = SubResource("RectangleShape2D_ru17a")
+one_way_collision = true
+one_way_collision_margin = 2.3
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(484, 330)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(0, 208)
+texture = ExtResource("2_ai0q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-1, 229.75)
+shape = SubResource("RectangleShape2D_ru17a")
+one_way_collision = true
+one_way_collision_margin = 2.3
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(365, 223)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+position = Vector2(0, 208)
+texture = ExtResource("2_ai0q7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-1, 230.5)
+shape = SubResource("RectangleShape2D_ru17a")
+one_way_collision = true
+one_way_collision_margin = 2.3
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+position = Vector2(10, 0)
+script = ExtResource("6_jppji")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+position = Vector2(472, 299)
+sprite_frames = SubResource("SpriteFrames_spelw")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(469, 301)
+shape = SubResource("RectangleShape2D_ak5qr")
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Enemy"]
+stream = ExtResource("8_gdnb6")
+volume_db = 14.545
+
+[node name="PlatformSpawner" type="Node2D" parent="."]
+script = ExtResource("8_idqqb")
+platform_scene = ExtResource("9_40wgg")
