@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://enemy.gd" id="6_jppji"]
 [ext_resource type="AudioStream" uid="uid://cgqwnkmjdg1k4" path="res://sounds/egg-monster-hit.mp3" id="8_gdnb6"]
 [ext_resource type="Script" path="res://platform_spawner.gd" id="8_idqqb"]
-[ext_resource type="PackedScene" uid="uid://cdhdn6sktfs7u" path="res://Platform.tscn" id="9_40wgg"]
+[ext_resource type="PackedScene" path="res://Platform.tscn" id="9_40wgg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
 size = Vector2(76, 25)
