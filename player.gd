@@ -32,8 +32,8 @@ func _process(delta):
 		diefalling()
 
 	if Input.is_action_just_pressed("shoot"):
-		anim.play("shoot")
 		nose.visible = true 
+		anim.play("shoot")
 		shoot()
 
 	# Check if left or right is also pressed while shooting
