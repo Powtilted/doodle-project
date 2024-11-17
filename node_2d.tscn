@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=17 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://duwmlbk0waruu" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" path="res://enemy.gd" id="6_jppji"]
 [ext_resource type="AudioStream" uid="uid://cgqwnkmjdg1k4" path="res://sounds/egg-monster-hit.mp3" id="8_gdnb6"]
 [ext_resource type="Script" path="res://platform_spawner.gd" id="8_idqqb"]
-[ext_resource type="PackedScene" path="res://Platform.tscn" id="9_40wgg"]
+[ext_resource type="PackedScene" uid="uid://dp4ypur0c1dfh" path="res://Platform.tscn" id="9_40wgg"]
+[ext_resource type="Script" path="res://MonsterSpawner.gd" id="11_vpxsl"]
+[ext_resource type="PackedScene" uid="uid://dqot4xul5hpi7" path="res://monster.tscn" id="12_skcxw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
 size = Vector2(76, 25)
@@ -150,3 +152,7 @@ volume_db = 14.545
 [node name="PlatformSpawner" type="Node2D" parent="."]
 script = ExtResource("8_idqqb")
 platform_scene = ExtResource("9_40wgg")
+
+[node name="MonsterSpawner" type="Node2D" parent="."]
+script = ExtResource("11_vpxsl")
+monster_scene = ExtResource("12_skcxw")

@@ -36,7 +36,7 @@ func spawn_platform(spawn_position = Vector2()):
 	platform.position = spawn_position
 	add_child(platform)
 	platforms.append(platform)
-	print("Spawned platform at position:", platform.position, "Total platforms:", platforms.size())
+	#print("Spawned platform at position:", platform.position, "Total platforms:", platforms.size())
 
 func get_highest_platform_y():
 	if platforms.is_empty():
@@ -56,5 +56,5 @@ func cleanup_platforms_below_player(player):
 		if platform.position.y > threshold_y:
 			platforms.remove_at(i)  # Remove from the array
 			platform.queue_free()  # Free the platform node
-			print("Removed platform at position:", platform.position)
+			#print("Removed platform at position:", platform.position)
  

@@ -1,19 +1,22 @@
 extends Area2D
 
 @export var speed = 500  # Bullet speed
-@onready var screen_size = get_viewport_rect().size  # Get screen size
-@onready var camera = get_parent().get_node("Camera2D")  # Get the Camera2D node
+@export var travel_distance = 1000  # Maximum distance the bullet will travel before disappearing
+var start_position = Vector2()  # The position when the bullet is created
+
+@onready var screen_size = get_viewport_rect().size  # Get the screen size
+
+func _ready():
+	start_position = position
 
 func _process(delta):
-	# Move the bullet upwards
-	position.y -= speed * delta  # Move upwards
+	position.y -= speed * delta
 
-	# If the bullet moves above the camera's view, queue it for removal
-	if camera:
-		var camera_pos = camera.position
-		if position.y < camera_pos.y - screen_size.y / 2:  # Bullet is off the top of the screen
-			queue_free()  # Remove the bullet if it's off the top of the screen
-			return
+	# distance the bullet has traveled
+	var distance_travelled = start_position.y - position.y
+
+	if distance_travelled >= travel_distance:
+		queue_free()  
 
 	# Check for collisions with enemies
 	var bodies = get_overlapping_bodies()
