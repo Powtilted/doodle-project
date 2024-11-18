@@ -6,8 +6,10 @@ var move_speed = 600
 var critical_fall_speed = 1000  # Adjust this value based on desired speed threshold
 var is_dead = false  # Flag to track if the player is already dead
 
+@onready var player_hitbox : CollisionShape2D = $CollisionShape2D
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var nose : Sprite2D = $NoseSprite2D 
+@onready var jetpack_animation : AnimatedSprite2D = $JetpackSprite2D
 @onready var view_size = get_viewport_rect().size
 @onready var Bullet = preload("res://bullet.tscn")
 @onready var jump_sound = $JumpSound
@@ -32,7 +34,7 @@ func _process(delta):
 		diefalling()
 
 	if Input.is_action_just_pressed("shoot"):
-		nose.visible = true 
+		nose.visible = true
 		anim.play("shoot")
 		shoot()
 
@@ -45,6 +47,10 @@ func _process(delta):
 		velocity.x = move_speed
 		anim.play("move_right")
 		nose.visible = false  # Hide nose when only moving
+	########################################################
+	elif Input.is_action_just_pressed("ins"): # temporary, should have the condition of an item existing
+		boost() # for jetpack to work properly, platforms need to spawn a little lower than before
+	########################################################
 	else:
 		velocity.x = 0
 		nose.visible = false  # Hide nose when idle
@@ -87,3 +93,18 @@ func shoot():
 	bullet.position = nose.global_position + Vector2(0, -65)
 	get_parent().add_child(bullet)
 	shoot_sound.play()
+
+func boost(type = "jetpack"): # can be modified to be different boosters (rockets, propeller, etc) via parameters to be added
+	player_hitbox.disabled = true
+	
+	if type == "jetpack":
+		jetpack_animation.visible = true # can trigger different animations based on parameters if wanted
+		jetpack_animation.play()
+		velocity.y = -1000
+		var old_gravity = gravity
+		gravity = 0
+		await get_tree().create_timer(2).timeout
+		velocity.y = 0
+		gravity = old_gravity
+		jetpack_animation.visible = false
+		player_hitbox.disabled = false
