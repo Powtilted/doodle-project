@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 	
 func _on_button_pressed() -> void:
 	#var main_game_scene = preload("res://node_2d.tscn")
+	await get_tree().create_timer(0).timeout
 	get_tree().change_scene_to_file("res://node_2d.tscn")

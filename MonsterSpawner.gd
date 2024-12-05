@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var monster_scene: PackedScene
+@export var zigzag_monster_scene: PackedScene
 var initial_offset = 50
 var monster_spacing = 1000
 var monsters = []
@@ -38,15 +39,24 @@ func spawn_initial_monsters():
 
 func spawn_monster(spawn_position = Vector2()):
 	var viewport_width = get_viewport_rect().size.x
+	var monster
 
 	spawn_position.x = randf() * viewport_width 	
 	if monsters.size() > 0:
 		spawn_position.y = monsters.back().position.y - monster_spacing
 	
-	var monster = monster_scene.instantiate()
+	if randf() < 0.5:
+		monster = zigzag_monster_scene.instantiate()
+		#
+	else:
+		monster = monster_scene.instantiate()
+	#var monster = monster_scene.instantiate()
+	
+	
 	monster.position = spawn_position
 	add_child(monster)
 	monsters.append(monster)
+	
 
 func get_highest_monster_y():
 	if monsters.is_empty():

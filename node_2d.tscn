@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=18 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://duwmlbk0waruu" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dp4ypur0c1dfh" path="res://Platform.tscn" id="9_40wgg"]
 [ext_resource type="Script" path="res://MonsterSpawner.gd" id="11_vpxsl"]
 [ext_resource type="PackedScene" uid="uid://dqot4xul5hpi7" path="res://monster.tscn" id="12_skcxw"]
+[ext_resource type="PackedScene" uid="uid://cyptkic1va731" path="res://zig_zag_monster.tscn" id="13_kyhq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
 size = Vector2(76, 25)
@@ -156,3 +157,4 @@ platform_scene = ExtResource("9_40wgg")
 [node name="MonsterSpawner" type="Node2D" parent="."]
 script = ExtResource("11_vpxsl")
 monster_scene = ExtResource("12_skcxw")
+zigzag_monster_scene = ExtResource("13_kyhq6")
