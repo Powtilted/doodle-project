@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyptkic1va731"]
+[gd_scene load_steps=8 format=3 uid="uid://cyptkic1va731"]
 
 [ext_resource type="Script" path="res://zig_zag_monster.gd" id="1_kbpxd"]
 [ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="2_senem"]
@@ -32,9 +32,17 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="ZigZagMonster" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vri48"]
+size = Vector2(100, 173)
+
+[node name="ZigZagMonster" type="CharacterBody2D"]
 script = ExtResource("1_kbpxd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 9)
 sprite_frames = SubResource("SpriteFrames_36560")
 animation = &"zigzagger"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8.5)
+shape = SubResource("RectangleShape2D_vri48")

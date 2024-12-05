@@ -45,11 +45,11 @@ func spawn_monster(spawn_position = Vector2()):
 	if monsters.size() > 0:
 		spawn_position.y = monsters.back().position.y - monster_spacing
 	
-	if randf() < 0.5:
-		monster = zigzag_monster_scene.instantiate()
+	#if randf() < 0.5:
+	monster = zigzag_monster_scene.instantiate()
 		#
-	else:
-		monster = monster_scene.instantiate()
+	#else:
+		#monster = monster_scene.instantiate()
 	#var monster = monster_scene.instantiate()
 	
 	
