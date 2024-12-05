@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://br1t8gw0lr0tt"]
+
+[ext_resource type="Script" path="res://start_screen.gd" id="1_qoq4a"]
+[ext_resource type="Texture2D" uid="uid://dmjevhuoabixn" path="res://Sprites/Default@2x.png" id="2_fl7f6"]
+[ext_resource type="Texture2D" uid="uid://cid7r4ldi0qny" path="res://Sprites/play@2x.png" id="3_scwfp"]
+[ext_resource type="Texture2D" uid="uid://c2e0g5t50kkel" path="res://Sprites/start-end-tiles@2x.png" id="4_w7jgr"]
+
+[node name="StartScreen" type="Control"]
+custom_minimum_size = Vector2(0, -100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qoq4a")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 1151.0
+offset_bottom = 1681.0
+texture = ExtResource("2_fl7f6")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 762.0
+offset_top = 491.0
+offset_right = 992.0
+offset_bottom = 579.0
+icon = ExtResource("3_scwfp")
+flat = true
+icon_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(200, 426)
+scale = Vector2(0.973633, 1)
+texture = ExtResource("4_w7jgr")
+region_enabled = true
+region_rect = Rect2(667.75, 383.3, 336.6, 77)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(148, 386)
+texture = ExtResource("4_w7jgr")
+region_enabled = true
+region_rect = Rect2(773.467, 335.2, 252.067, 49.5)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

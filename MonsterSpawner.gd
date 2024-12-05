@@ -7,6 +7,7 @@ var monsters = []
 var spawn_buffer = 500  
 
 func _ready():
+	randomize()
 	spawn_initial_monsters()
 
 func _process(_delta):
@@ -30,15 +31,17 @@ func spawn_initial_monsters():
 
 		if spawn_y < player_y + spawn_buffer:  
 			spawn_y = player_y + spawn_buffer  
+		
 
-		spawn_monster(Vector2(0, spawn_y))
+		#spawn_monster(Vector2(0, spawn_y))
+		spawn_monster(Vector2(randf() * get_viewport_rect().size.x, spawn_y))
 
 func spawn_monster(spawn_position = Vector2()):
 	var viewport_width = get_viewport_rect().size.x
-	spawn_position.x = randf_range(0, viewport_width)  
-	
+
+	spawn_position.x = randf() * viewport_width 	
 	if monsters.size() > 0:
-		spawn_position.y = monsters.back().position.y - monster_spacing  # Ensures vertical spacing
+		spawn_position.y = monsters.back().position.y - monster_spacing
 	
 	var monster = monster_scene.instantiate()
 	monster.position = spawn_position

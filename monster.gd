@@ -15,10 +15,14 @@ func _process(delta):
 	
 	position.x += speed * direction * delta
 
-	if position.x > 400:  # Right limit
+	var space =  get_viewport_rect().size.x
+		
+	if position.x > space:
 		direction = -1
-	elif position.x < 50:  # Left limit
+		
+	
+	elif position.x < 0:
 		direction = 1
-
+	
 func die():
 	queue_free() 
