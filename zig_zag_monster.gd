@@ -1,6 +1,6 @@
 extends CharacterBody2D
 @export var speed: float = 300
-@export var zigzag_amplitude: float = 350
+@export var zigzag_amplitude: float = 150
 @export var zigzag_frequency: float = 0.01
 
 var direction: int = 1

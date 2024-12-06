@@ -17,6 +17,9 @@ var is_dead = false  # Flag to track if the player is already dead
 @onready var falling_death_sound = $FallingDeathSound
 @onready var shoot_sound = $ShootSound  
 
+func _ready():
+	anim.z_index = 1
+
 func wrapping_screen():
 	position.x = wrapf(position.x, 0, view_size.x)
 
@@ -93,6 +96,31 @@ func shoot():
 	bullet.position = nose.global_position + Vector2(0, -65)
 	get_parent().add_child(bullet)
 	shoot_sound.play()
+	
+func _on_hole_collided()-> void:
+	anim.rotation_degrees = 90
+	#diefalling()
+	
+func shrink_and_disappear():
+	if is_dead:
+		return
+		
+	is_dead = true
+	var shrink_duration = 1
+	var fade_duration = 1
+	var steps = 30
+	
+	for i in range(steps):
+		var scale_factor = lerp(1.0, 0.1, float(i) / steps)
+		var alpha = lerp(1.0, 0.0, float(i) / steps)
+		
+		scale = Vector2(scale_factor, scale_factor)
+		modulate.a = alpha
+		
+		await get_tree().create_timer(shrink_duration / steps).timeout
+	queue_free()
+	#get_tree().call_group("GameControl", "on_game_over")
+	
 
 func boost(type = "jetpack"): # can be modified to be different boosters (rockets, propeller, etc) via parameters to be added
 	player_hitbox.disabled = true

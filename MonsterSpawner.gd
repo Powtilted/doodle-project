@@ -3,6 +3,7 @@ extends Node2D
 @export var monster_scene: PackedScene
 @export var zigzag_monster_scene: PackedScene
 @export var bouncing_monster_scene: PackedScene
+@export var hole_spawn_scene: PackedScene
 
 var initial_offset = 50
 var monster_spacing = 1000
@@ -49,7 +50,9 @@ func spawn_monster(spawn_position = Vector2()):
 	if monsters.size() > 0:
 		spawn_position.y = monsters.back().position.y - monster_spacing
 	
-	if randf() < 0.1:
+	if randf() < 0.05:
+		monster = hole_spawn_scene.instantiate()
+	elif randf() < 0.1:
 		monster = zigzag_monster_scene.instantiate()
 		#
 	elif randf() < 0.4:
@@ -81,3 +84,7 @@ func cleanup_monsters_below_player(player):
 		if monster.position.y > threshold_y:
 			monsters.remove_at(i)  # Remove from the array
 			monster.queue_free()  # Free the monster node
+
+
+
+	
