@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=19 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://duwmlbk0waruu" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://MonsterSpawner.gd" id="11_vpxsl"]
 [ext_resource type="PackedScene" uid="uid://dqot4xul5hpi7" path="res://monster.tscn" id="12_skcxw"]
 [ext_resource type="PackedScene" uid="uid://cyptkic1va731" path="res://zig_zag_monster.tscn" id="13_kyhq6"]
+[ext_resource type="PackedScene" uid="uid://dcpmqtk66iq4a" path="res://bouncing_monster.tscn" id="14_bywmm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
 size = Vector2(76, 25)
@@ -134,10 +135,12 @@ one_way_collision = true
 one_way_collision_margin = 2.3
 
 [node name="Enemy" type="CharacterBody2D" parent="."]
+visible = false
 position = Vector2(10, 0)
 script = ExtResource("6_jppji")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
+visible = false
 position = Vector2(472, 299)
 sprite_frames = SubResource("SpriteFrames_spelw")
 animation = &"move"
@@ -145,6 +148,7 @@ animation = &"move"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 position = Vector2(469, 301)
 shape = SubResource("RectangleShape2D_ak5qr")
+disabled = true
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="Enemy"]
 stream = ExtResource("8_gdnb6")
@@ -158,3 +162,4 @@ platform_scene = ExtResource("9_40wgg")
 script = ExtResource("11_vpxsl")
 monster_scene = ExtResource("12_skcxw")
 zigzag_monster_scene = ExtResource("13_kyhq6")
+bouncing_monster_scene = ExtResource("14_bywmm")
