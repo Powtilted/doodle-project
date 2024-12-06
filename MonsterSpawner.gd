@@ -10,11 +10,13 @@ var monster_spacing = 1000
 var monsters = []
 var spawn_buffer = 500  
 
+
 func _ready():
 	randomize()
 	spawn_initial_monsters()
 
 func _process(_delta):
+	
 	var player = get_tree().current_scene.get_node("Player")
 	if player:
 	

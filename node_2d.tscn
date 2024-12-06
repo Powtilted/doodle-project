@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=22 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://duwmlbk0waruu" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://cyptkic1va731" path="res://zig_zag_monster.tscn" id="13_kyhq6"]
 [ext_resource type="PackedScene" uid="uid://dcpmqtk66iq4a" path="res://bouncing_monster.tscn" id="14_bywmm"]
 [ext_resource type="PackedScene" uid="uid://qjkyw0npbfry" path="res://hole.tscn" id="15_1c0ob"]
+[ext_resource type="Texture2D" uid="uid://c2e0g5t50kkel" path="res://Sprites/start-end-tiles@2x.png" id="16_87gm8"]
+[ext_resource type="Script" path="res://score_display.gd" id="17_6hqkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru17a"]
 size = Vector2(76, 25)
@@ -165,3 +167,28 @@ monster_scene = ExtResource("12_skcxw")
 zigzag_monster_scene = ExtResource("13_kyhq6")
 bouncing_monster_scene = ExtResource("14_bywmm")
 hole_spawn_scene = ExtResource("15_1c0ob")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Sprite2D" parent="CanvasLayer"]
+texture = ExtResource("16_87gm8")
+offset = Vector2(115, 20)
+region_enabled = true
+region_rect = Rect2(893.998, 333.199, 130.438, 43.9231)
+
+[node name="ScoreDisplay" type="Node2D" parent="."]
+position = Vector2(185, -10)
+scale = Vector2(2, 2)
+script = ExtResource("17_6hqkn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreDisplay"]
+
+[node name="ScoreLabel" type="Label" parent="ScoreDisplay/CanvasLayer"]
+offset_left = 188.0
+offset_top = -5.0
+offset_right = 285.0
+offset_bottom = 37.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "0"
+uppercase = true

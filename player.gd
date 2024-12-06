@@ -6,6 +6,7 @@ var move_speed = 600
 var critical_fall_speed = 1000  # Adjust this value based on desired speed threshold
 var is_dead = false  # Flag to track if the player is already dead
 
+
 @onready var player_hitbox : CollisionShape2D = $CollisionShape2D
 @onready var anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var nose : Sprite2D = $NoseSprite2D 
@@ -18,7 +19,7 @@ var is_dead = false  # Flag to track if the player is already dead
 @onready var shoot_sound = $ShootSound  
 
 func _ready():
-	anim.z_index = 1
+	pass
 
 func wrapping_screen():
 	position.x = wrapf(position.x, 0, view_size.x)
@@ -26,7 +27,7 @@ func wrapping_screen():
 func _process(delta):
 	if is_dead:
 		return  # Prevent further processing if the player is dead
-	
+
 	wrapping_screen()
 	
 	# Apply gravity
@@ -79,6 +80,7 @@ func die():
 	await get_tree().create_timer(0.15).timeout
 	get_tree().paused = true
 	set_process_input(false)
+	get_tree().change_scene_to_file("res://game_over.tscn")
 	
 func diefalling():
 	if is_dead:
@@ -90,15 +92,19 @@ func diefalling():
 	await get_tree().create_timer(0.1).timeout
 	get_tree().paused = true
 	set_process_input(false)
+	get_tree().change_scene_to_file("res://game_over.tscn")
 
 func shoot():
 	var bullet = Bullet.instantiate()
 	bullet.position = nose.global_position + Vector2(0, -65)
 	get_parent().add_child(bullet)
 	shoot_sound.play()
+	#get_tree().change_scene_to_file("res://game_over.tscn")
 	
 func _on_hole_collided()-> void:
 	anim.rotation_degrees = 90
+	
+	get_tree().change_scene_to_file("res://game_over.tscn")
 	#diefalling()
 	
 func shrink_and_disappear():
@@ -118,7 +124,8 @@ func shrink_and_disappear():
 		modulate.a = alpha
 		
 		await get_tree().create_timer(shrink_duration / steps).timeout
-	queue_free()
+	
+	#queue_free()
 	#get_tree().call_group("GameControl", "on_game_over")
 	
 

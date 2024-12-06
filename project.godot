@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 buses/default_bus_layout=""
 
+[autoload]
+
+ScoreManager="*res://ScoreManager.gd"
+
 [input]
 
 move_left={
