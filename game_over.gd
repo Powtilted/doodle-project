@@ -9,6 +9,11 @@ func _ready() -> void:
 	high_label.text = str(ScoreManager.high_score)
 	
 	
+func _process(delta: float) -> void:
+	pass
+	
+	
 func _on_button_pressed() -> void:
 	print("button pressed")
-	get_tree().change_scene_to_file("res://start_screen.tscn")
+	ScoreManager.score = 0
+	get_tree().change_scene_to_file("res://node_2d.tscn")

@@ -52,10 +52,10 @@ func spawn_monster(spawn_position = Vector2()):
 	if monsters.size() > 0:
 		spawn_position.y = monsters.back().position.y - monster_spacing
 	
-	if randf() < 0.05:
-		monster = hole_spawn_scene.instantiate()
-	elif randf() < 0.1:
+	if randf() < 0.15:
 		monster = zigzag_monster_scene.instantiate()
+	elif randf() < 0.25:
+		monster = hole_spawn_scene.instantiate()
 		#
 	elif randf() < 0.4:
 		monster = bouncing_monster_scene.instantiate()

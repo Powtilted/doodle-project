@@ -21,6 +21,15 @@ offset_right = 1148.0
 offset_bottom = 1907.0
 texture = ExtResource("2_1ypgr")
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 481.0
+offset_right = 1036.0
+offset_bottom = 571.0
+icon = ExtResource("4_flkfm")
+flat = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_kh0g3")
 centered = false
@@ -52,15 +61,6 @@ texture = ExtResource("6_35503")
 [node name="Sprite2D6" type="Sprite2D" parent="."]
 position = Vector2(749, 292)
 texture = ExtResource("7_a5yxg")
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 804.0
-offset_top = 481.0
-offset_right = 1036.0
-offset_bottom = 571.0
-icon = ExtResource("4_flkfm")
-flat = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

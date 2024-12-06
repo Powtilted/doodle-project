@@ -32,6 +32,7 @@ flat = true
 icon_alignment = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(200, 426)
 scale = Vector2(0.973633, 1)
 texture = ExtResource("4_w7jgr")
@@ -46,6 +47,7 @@ region_enabled = true
 region_rect = Rect2(773.467, 335.2, 252.067, 49.5)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 371.0
 offset_top = 403.0

@@ -77,9 +77,10 @@ func die():
 	
 	death_sound.play()
 	print("Doodle is dead!")
-	await get_tree().create_timer(0.15).timeout
-	get_tree().paused = true
+	#get_tree().paused = true
 	set_process_input(false)
+	set_process(true)
+	await get_tree().create_timer(0.15).timeout
 	get_tree().change_scene_to_file("res://game_over.tscn")
 	
 func diefalling():
@@ -89,9 +90,11 @@ func diefalling():
 	
 	falling_death_sound.play()
 	print("Doodle is dead from falling!")
-	await get_tree().create_timer(0.1).timeout
-	get_tree().paused = true
+	#get_tree().paused = true
 	set_process_input(false)
+	set_process(true)
+	
+	await get_tree().create_timer(0.1).timeout
 	get_tree().change_scene_to_file("res://game_over.tscn")
 
 func shoot():
@@ -100,12 +103,6 @@ func shoot():
 	get_parent().add_child(bullet)
 	shoot_sound.play()
 	#get_tree().change_scene_to_file("res://game_over.tscn")
-	
-func _on_hole_collided()-> void:
-	anim.rotation_degrees = 90
-	
-	get_tree().change_scene_to_file("res://game_over.tscn")
-	#diefalling()
 	
 func shrink_and_disappear():
 	if is_dead:
@@ -124,11 +121,9 @@ func shrink_and_disappear():
 		modulate.a = alpha
 		
 		await get_tree().create_timer(shrink_duration / steps).timeout
+	get_tree().change_scene_to_file("res://game_over.tscn")
+		#print("here")
 	
-	#queue_free()
-	#get_tree().call_group("GameControl", "on_game_over")
-	
-
 func boost(type = "jetpack"): # can be modified to be different boosters (rockets, propeller, etc) via parameters to be added
 	player_hitbox.disabled = true
 	
