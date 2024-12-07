@@ -131,7 +131,6 @@ func boost(type = "jetpack"): # can be modified to be different boosters (rocket
 		jetpack_animation.visible = true # can trigger different animations based on parameters if wanted
 		jetpack_animation.play()
 		velocity.y = -1000
-		ScoreManager.increase_score(50)
 		var old_gravity = gravity
 		gravity = 0
 		await get_tree().create_timer(2).timeout

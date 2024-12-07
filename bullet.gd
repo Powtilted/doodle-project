@@ -23,8 +23,8 @@ func _process(delta):
 	for body in bodies:
 		if body.is_in_group("enemies"):  # If we hit an enemy
 			print("Bullet collided with an enemy!")
-			ScoreManager.increase_score(10)
 			if body.has_method("die"):
 				body.die()  # Call the enemy's die function
+				ScoreManager.increase_score(50)
 			queue_free()  # Remove the bullet after it collides
 			return  # Exit after the bullet hits the enemy
