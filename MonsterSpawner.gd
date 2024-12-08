@@ -1,90 +1,92 @@
 extends Node2D
 
-@export var platform_scene: PackedScene
-@export var sliding_platform_scene: PackedScene
-@export var disappearing_platform_scene: PackedScene
+var monster_scene = preload("res://Monster.tscn")
+var zigzag_monster_scene = preload("res://zig_zag_monster.tscn")
+var bouncing_monster_scene = preload("res://bouncing_monster.tscn")
+var hole_spawn_scene = preload("res://hole.tscn")
 
 var initial_offset = 50
-var platform_spacing = 120  # Maximum vertical distance between platforms
-var min_horizontal_spacing = 100  # Minimum horizontal spacing between platforms
-var platforms = []
-var spawn_buffer = 100  # Minimum distance above player to spawn platforms
+var monster_spacing = 1000
+var monsters = []
+var spawn_buffer = 500  
+
 
 func _ready():
 	randomize()
-	spawn_initial_platforms()
+	spawn_initial_monsters()
 
 func _process(_delta):
+	
 	var player = get_tree().current_scene.get_node("Player")
 	if player:
-		# Spawn new platforms as needed
-		if get_highest_platform_y() > player.position.y - get_viewport_rect().size.y:
-			spawn_platform(Vector2(0, player.position.y - get_viewport_rect().size.y - platform_spacing))
+	
+		if get_highest_monster_y() > player.position.y - get_viewport_rect().size.y:
+			spawn_monster(Vector2(0, player.position.y - get_viewport_rect().size.y - monster_spacing))
 
-func spawn_initial_platforms():
+func spawn_initial_monsters():
 	var viewport_height = get_viewport_rect().size.y
-	var num_platforms = ceil(viewport_height / platform_spacing) + 1
+	var num_monsters = ceil(viewport_height / monster_spacing) + 1
 
+	
 	var player = get_tree().current_scene.get_node("Player")
-	var player_y = player.position.y if player else 0
+	var player_y = player.position.y if player else 0  
 
-	for i in range(num_platforms):
-		var spawn_y = viewport_height - i * platform_spacing + initial_offset
-		if spawn_y < player_y + spawn_buffer:
-			spawn_y = player_y + spawn_buffer
+	for i in range(num_monsters):
+		
+		var spawn_y = viewport_height - i * monster_spacing + initial_offset
 
-		spawn_platform(Vector2(randf() * get_viewport_rect().size.x, spawn_y))
+		if spawn_y < player_y + spawn_buffer:  
+			spawn_y = player_y + spawn_buffer  
+		
 
-func spawn_platform(spawn_position = Vector2()):
+		#spawn_monster(Vector2(0, spawn_y))
+		spawn_monster(Vector2(randf() * get_viewport_rect().size.x, spawn_y))
+
+func spawn_monster(spawn_position = Vector2()):
 	var viewport_width = get_viewport_rect().size.x
-	var platform
+	var monster
 	var safe_margin = 50
 
-	# Randomize the X position
+	#spawn_position.x = randf() * viewport_width 	
 	spawn_position.x = safe_margin + randf() * (viewport_width - 2 * safe_margin)
-
-	# Adjust vertical position to respect maximum spacing
-	if platforms.size() > 0:
-		var last_platform_y = platforms.back().position.y
-		# Ensure the new platform is no farther than platform_spacing
-		spawn_position.y = max(last_platform_y - platform_spacing, spawn_position.y)
-
-	# Enforce minimum spacing between new platform and all existing platforms
-	for existing_platform in platforms:
-		var distance = existing_platform.position.distance_to(spawn_position)
-		if distance < min_horizontal_spacing:
-			# Reposition to avoid overlap
-			spawn_position.x = randf() * (viewport_width - 2 * safe_margin) + safe_margin
-			spawn_position.y = existing_platform.position.y - platform_spacing
-
-	# Randomize platform type
-	var platform_type = randf()
-	if sliding_platform_scene != null and platform_type < 0.15:
-		platform = sliding_platform_scene.instantiate()
-	elif disappearing_platform_scene != null and platform_type < 0.3:
-		platform = disappearing_platform_scene.instantiate()
-	elif platform_scene != null:
-		platform = platform_scene.instantiate()
+	if monsters.size() > 0:
+		spawn_position.y = monsters.back().position.y - monster_spacing
+	
+	if randf() < 0.15:
+		monster = zigzag_monster_scene.instantiate()
+	elif randf() < 0.25:
+		monster = hole_spawn_scene.instantiate()
+		#
+	elif randf() < 0.4:
+		monster = bouncing_monster_scene.instantiate()
 	else:
-		print("Error: No platform scene assigned!")
-		return
+		monster = monster_scene.instantiate()
+	#var monster = monster_scene.instantiate()
+	
 
-	# Place the platform and add to the scene
-	platform.position = spawn_position
-	add_child(platform)
-	platforms.append(platform)
+	
+	monster.position = spawn_position
+	add_child(monster)
+	monsters.append(monster)
+	
 
-func get_highest_platform_y():
-	if platforms.is_empty():
+func get_highest_monster_y():
+	if monsters.is_empty():
 		return INF
-	return platforms[0].position.y
+	return monsters[0].position.y
 
-func cleanup_platforms_below_player(player):
+func cleanup_monsters_below_player(player):
 	var player_y = player.position.y
-	var threshold_y = player_y + get_viewport_rect().size.y * 0.5  # Keep platforms longer on-screen
+	var threshold_y = player_y + get_viewport_rect().size.y * 0.1  
 
-	for i in range(platforms.size() - 1, -1, -1):
-		var platform = platforms[i]
-		if platform.position.y > threshold_y:
-			platforms.remove_at(i)  # Remove from the array
-			platform.queue_free()  # Free the platform node
+	for i in range(monsters.size() - 1, -1, -1):
+		var monster = monsters[i]
+
+		
+		if monster.position.y > threshold_y:
+			monsters.remove_at(i)  # Remove from the array
+			monster.queue_free()  # Free the monster node
+
+
+
+	

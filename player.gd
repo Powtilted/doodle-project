@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var gravity = 800
-var jump_strength = -650
+var jump_strength = -675
 var move_speed = 600
 var critical_fall_speed = 1000  # Adjust this value based on desired speed threshold
 var is_dead = false  # Flag to track if the player is already dead
