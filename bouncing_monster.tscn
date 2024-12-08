@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcpmqtk66iq4a"]
+
+[ext_resource type="Script" path="res://bouncing_monster.gd" id="1_l5slg"]
+[ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="2_566wf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td8tc"]
+atlas = ExtResource("2_566wf")
+region = Rect2(1025, 0, 205, 69)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrqk4"]
+atlas = ExtResource("2_566wf")
+region = Rect2(1025, 69, 205, 69)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k158y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td8tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrqk4")
+}],
+"loop": true,
+"name": &"green_monster",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4hwl"]
+size = Vector2(168, 54)
+
+[node name="bouncing_monster" type="CharacterBody2D"]
+script = ExtResource("1_l5slg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k158y")
+animation = &"green_monster"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, 2)
+shape = SubResource("RectangleShape2D_s4hwl")

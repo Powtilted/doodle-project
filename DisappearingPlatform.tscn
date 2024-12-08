@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdapa7sv0lo7"]
+
+[ext_resource type="Script" path="res://DisappearingPlatform.gd" id="1_mg21y"]
+[ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="1_w81kh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiu70"]
+size = Vector2(121, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_loll8"]
+size = Vector2(122, 35)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 2
+script = ExtResource("1_mg21y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w81kh")
+region_enabled = true
+region_rect = Rect2(1.24238, 593.142, 123.412, 41.5616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iiu70")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_loll8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
