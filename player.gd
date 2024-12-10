@@ -47,10 +47,14 @@ func _process(delta):
 		velocity.x = -move_speed
 		anim.play("move_left")
 		nose.visible = false  # Hide nose when only moving
+		jetpack_animation.position = Vector2(42, 36)
+		jetpack_animation.flip_h = false
 	elif Input.is_action_pressed("move_right"):
 		velocity.x = move_speed
 		anim.play("move_right")
 		nose.visible = false  # Hide nose when only moving
+		jetpack_animation.position = Vector2(-42, 36)
+		jetpack_animation.flip_h = true
 	########################################################
 	elif Input.is_action_just_pressed("ins"): # temporary, should have the condition of an item existing
 		boost() # for jetpack to work properly, platforms need to spawn a little lower than before
