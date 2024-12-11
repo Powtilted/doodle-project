@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=17 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://6omnd4j4px6b" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
 [ext_resource type="Texture2D" uid="uid://dqc0bf8mrmq14" path="res://Sprites/bck@2x.png" id="2_oltps"]
-[ext_resource type="AudioStream" uid="uid://dtuk0doey1x78" path="res://sounds/jetpack1.mp3" id="3_e2mqm"]
 [ext_resource type="Texture2D" uid="uid://bxlw06o1mf61h" path="res://Sprites/jungle-scroller@2x-left.png" id="4_d0w6l"]
 [ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="6_7g018"]
 [ext_resource type="Script" path="res://item_spawner.gd" id="6_dqte7"]
@@ -51,10 +50,6 @@ offset = Vector2(512, 0)
 limit_left = 0
 limit_right = 640
 script = ExtResource("2_4culv")
-
-[node name="jetpack_sound" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("3_e2mqm")
-volume_db = -19.81
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

@@ -17,9 +17,10 @@ var is_dead = false  # Flag to track if the player is already dead
 @onready var death_sound = $DeathSound
 @onready var falling_death_sound = $FallingDeathSound
 @onready var shoot_sound = $ShootSound  
+@onready var jetpack_sound = $jetpack_sound
 
 func _ready():
-	pass
+	add_to_group("player")
 
 func wrapping_screen():
 	position.x = wrapf(position.x, 0, view_size.x)
@@ -132,6 +133,7 @@ func boost(type = "jetpack"): # can be modified to be different boosters (rocket
 	player_hitbox.disabled = true
 	
 	if type == "jetpack":
+		jetpack_sound.play()
 		jetpack_animation.visible = true # can trigger different animations based on parameters if wanted
 		jetpack_animation.play()
 		velocity.y = -1000

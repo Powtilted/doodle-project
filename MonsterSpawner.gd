@@ -8,7 +8,7 @@ var hole_spawn_scene = preload("res://hole.tscn")
 var initial_offset = 50
 var monster_spacing = 1000
 var monsters = []
-var spawn_buffer = 500  
+var spawn_buffer = 500
 
 
 func _ready():
