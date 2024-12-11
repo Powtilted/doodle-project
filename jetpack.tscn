@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0iyf4pj1s12i"]
+
+[ext_resource type="Texture2D" uid="uid://b7gaaqvvtjabv" path="res://Sprites/jetpack_powerup.png" id="1_avdut"]
+[ext_resource type="Script" path="res://jetpack.gd" id="1_jeug3"]
+[ext_resource type="AudioStream" uid="uid://dtuk0doey1x78" path="res://sounds/jetpack1.mp3" id="3_7jtfa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ievm"]
+size = Vector2(48, 73)
+
+[node name="Jetpack" type="Area2D"]
+script = ExtResource("1_jeug3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_avdut")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_1ievm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7jtfa")
+volume_db = 24.0

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdapa7sv0lo7"]
+
+[ext_resource type="Script" path="res://DisappearingPlatform.gd" id="1_mg21y"]
+[ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="1_w81kh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h7xvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_liw5c"]
+size = Vector2(120, 34)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_h7xvu")
+script = ExtResource("1_mg21y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w81kh")
+region_enabled = true
+region_rect = Rect2(1.24238, 593.142, 123.412, 41.5616)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_liw5c")
+one_way_collision = true

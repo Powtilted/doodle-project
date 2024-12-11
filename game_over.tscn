@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://rd7f1pxsb1n2"]
+
+[ext_resource type="Script" path="res://game_over.gd" id="1_ayvig"]
+[ext_resource type="Texture2D" uid="uid://dqc0bf8mrmq14" path="res://Sprites/bck@2x.png" id="2_1ypgr"]
+[ext_resource type="Texture2D" uid="uid://c2e0g5t50kkel" path="res://Sprites/start-end-tiles@2x.png" id="3_kh0g3"]
+[ext_resource type="Texture2D" uid="uid://c6rocd82heoen" path="res://Sprites/play-again-on@2x.png" id="4_flkfm"]
+[ext_resource type="Texture2D" uid="uid://c6h5wl6sgduo5" path="res://Sprites/lik-puca@2x.png" id="5_ve8s8"]
+[ext_resource type="Texture2D" uid="uid://bfdm1ug42f2d1" path="res://Sprites/stars3@2x.png" id="6_35503"]
+[ext_resource type="Texture2D" uid="uid://dtvjtb8xct76" path="res://Sprites/lik-njuska@2x.png" id="7_a5yxg"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ayvig")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1148.0
+offset_bottom = 1907.0
+texture = ExtResource("2_1ypgr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 481.0
+offset_right = 1036.0
+offset_bottom = 571.0
+icon = ExtResource("4_flkfm")
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_kh0g3")
+centered = false
+offset = Vector2(30, 40)
+region_enabled = true
+region_rect = Rect2(-1.70056, 203.2, 437.8, 166.1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(200, 426)
+scale = Vector2(0.973633, 1)
+texture = ExtResource("3_kh0g3")
+region_enabled = true
+region_rect = Rect2(667.75, 383.3, 336.6, 77)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(148, 386)
+texture = ExtResource("3_kh0g3")
+region_enabled = true
+region_rect = Rect2(773.467, 335.2, 252.067, 49.5)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(749, 292)
+texture = ExtResource("5_ve8s8")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(651, 235)
+texture = ExtResource("6_35503")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(749, 292)
+texture = ExtResource("7_a5yxg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 356.0
+offset_right = 498.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 404.0
+offset_right = 542.0
+offset_bottom = 462.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

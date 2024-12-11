@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyptkic1va731"]
+
+[ext_resource type="Script" path="res://zig_zag_monster.gd" id="1_kbpxd"]
+[ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="2_senem"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h08l"]
+atlas = ExtResource("2_senem")
+region = Rect2(0, 845, 130, 169)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgujr"]
+atlas = ExtResource("2_senem")
+region = Rect2(130, 845, 130, 169)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0eor"]
+atlas = ExtResource("2_senem")
+region = Rect2(260, 845, 130, 169)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_36560"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h08l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgujr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0eor")
+}],
+"loop": true,
+"name": &"zigzagger",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vri48"]
+size = Vector2(100, 173)
+
+[node name="ZigZagMonster" type="CharacterBody2D"]
+script = ExtResource("1_kbpxd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, 9)
+sprite_frames = SubResource("SpriteFrames_36560")
+animation = &"zigzagger"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8.5)
+shape = SubResource("RectangleShape2D_vri48")
