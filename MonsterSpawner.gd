@@ -73,6 +73,15 @@ func spawn_monster(spawn_position = Vector2()):
 func get_highest_monster_y():
 	if monsters.is_empty():
 		return INF
+		#comment
+		
+	for i in range(monsters.size() - 1, -1, -1):
+		if monsters[i] == null or monsters[i].is_queued_for_deletion():
+			monsters.remove_at(i)
+			 
+	if monsters.is_empty():
+		return INF
+			
 	return monsters[0].position.y
 
 func cleanup_monsters_below_player(player):

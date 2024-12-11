@@ -16,4 +16,5 @@ func _process(delta: float) -> void:
 func _on_button_pressed() -> void:
 	print("button pressed")
 	ScoreManager.score = 0
+	ScoreManager.highest_pos = 600
 	get_tree().change_scene_to_file("res://node_2d.tscn")
