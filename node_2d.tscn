@@ -1,15 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://b47fcqgb618w"]
+[gd_scene load_steps=26 format=3 uid="uid://b47fcqgb618w"]
 
 [ext_resource type="PackedScene" uid="uid://6omnd4j4px6b" path="res://Player.tscn" id="1_p8ls5"]
 [ext_resource type="Script" path="res://camera_2d.gd" id="2_4culv"]
+[ext_resource type="Texture2D" uid="uid://du5ohafmp254s" path="res://Sprites/jungle-bck@2x.png" id="2_obwah"]
 [ext_resource type="Texture2D" uid="uid://dqc0bf8mrmq14" path="res://Sprites/bck@2x.png" id="2_oltps"]
 [ext_resource type="AudioStream" uid="uid://dtuk0doey1x78" path="res://sounds/jetpack1.mp3" id="3_e2mqm"]
+[ext_resource type="Texture2D" uid="uid://ceiingi6jvdi5" path="res://Sprites/ghost-bck@2x.png" id="3_qqij7"]
+[ext_resource type="Texture2D" uid="uid://oi6jp24hf2le" path="res://Sprites/underwater-bck@2x.png" id="3_wk727"]
 [ext_resource type="Texture2D" uid="uid://bxlw06o1mf61h" path="res://Sprites/jungle-scroller@2x-left.png" id="4_d0w6l"]
+[ext_resource type="Texture2D" uid="uid://cdowj74sfwpjm" path="res://Sprites/space-bck@2x.png" id="5_jo4ne"]
 [ext_resource type="Texture2D" uid="uid://clu6w5rrxam21" path="res://Sprites/game-tiles@2x.png" id="6_7g018"]
 [ext_resource type="Script" path="res://item_spawner.gd" id="6_dqte7"]
 [ext_resource type="Script" path="res://enemy.gd" id="6_jppji"]
+[ext_resource type="Texture2D" uid="uid://ud5u8ilmri6r" path="res://Sprites/soccer-bck@2x.png" id="6_vfufq"]
+[ext_resource type="Texture2D" uid="uid://c5vfa8jgytlhd" path="res://Sprites/hop-bck@2x.png" id="7_wmxxq"]
+[ext_resource type="Texture2D" uid="uid://d2pnku4lxxjpo" path="res://Sprites/ice-bck@2x.png" id="8_7rfis"]
 [ext_resource type="AudioStream" uid="uid://cgqwnkmjdg1k4" path="res://sounds/egg-monster-hit.mp3" id="8_gdnb6"]
 [ext_resource type="Script" path="res://platform_spawner.gd" id="8_idqqb"]
+[ext_resource type="Texture2D" uid="uid://cy1dcivib1f7c" path="res://Sprites/doodlestein-bck@2x.png" id="9_ue71r"]
 [ext_resource type="Script" path="res://MonsterSpawner.gd" id="11_vpxsl"]
 [ext_resource type="Texture2D" uid="uid://c2e0g5t50kkel" path="res://Sprites/start-end-tiles@2x.png" id="16_87gm8"]
 [ext_resource type="Script" path="res://score_display.gd" id="17_6hqkn"]
@@ -45,6 +53,7 @@ size = Vector2(176, 56)
 [node name="Player" parent="." instance=ExtResource("1_p8ls5")]
 position = Vector2(225, 600)
 collision_layer = 1
+backgrounds = Array[Texture]([ExtResource("2_obwah"), ExtResource("3_qqij7"), ExtResource("3_wk727"), ExtResource("5_jo4ne"), ExtResource("6_vfufq"), ExtResource("7_wmxxq"), ExtResource("8_7rfis"), ExtResource("9_ue71r")])
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2(512, 0)
@@ -62,7 +71,6 @@ volume_db = -19.81
 motion_mirroring = Vector2(512, 1024)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(8, -3)
 texture = ExtResource("2_oltps")
 centered = false
 offset = Vector2(0, -100)

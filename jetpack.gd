@@ -3,7 +3,9 @@ extends Area2D
 # Reference to the player
 var player = null
 
-@onready var jetpack_sprite: AnimatedSprite2D = $AnimatedSprite2D  # Assuming the jetpack has an AnimatedSprite2D
+#@onready var jetpack_sprite: AnimatedSprite2D = $AnimatedSprite2D  # Assuming the jetpack has an AnimatedSprite2D
+#res://jetpack.gd
+var jetpack_sprite = preload("res://jetpack.gd")
 
 func _ready() -> void:
 	pass

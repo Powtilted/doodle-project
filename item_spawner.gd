@@ -7,9 +7,9 @@ var jetpack_scene = preload("res://jetpack.tscn")
 var items = []
 var item_spacing = 1000  # Vertical space between items
 var safe_margin = 500  # Horizontal margin for spawning
-var item_spawn_chance = 1  # The chance to spawn an item (1 means always spawn)
-var max_items = 2  # Maximum number of items allowed in the scene
-var min_item_spacing = 3000  # Minimum distance between spawned items vertically
+var item_spawn_chance = 0.01  # The chance to spawn an item (1 means always spawn)
+var max_items = 1  # Maximum number of items allowed in the scene
+var min_item_spacing = 5000  # Minimum distance between spawned items vertically
 var cleanup_interval = 1.0  # Time in seconds between cleanup checks
 var last_cleanup_time = 0.0  # Time since last cleanup check
 
@@ -35,21 +35,18 @@ func _process(delta: float) -> void:
 					safe_margin + randf() * (get_viewport_rect().size.x - 2 * safe_margin),
 					get_valid_spawn_y(player)  # Pass the player object here to the function
 				))
-
 func spawn_item(spawn_position: Vector2) -> void:
-	#print("Attempting to spawn item at: ", spawn_position)
-	if randf() < item_spawn_chance:  # Only spawn if the random chance is met
+	# Randomize the x-coordinate across the entire screen width, within the safe margin
+	spawn_position.x = randf() * get_viewport_rect().size.x
+	
+	# Check if the random chance for spawning is met
+	if randf() < item_spawn_chance:
 		var item = jetpack_scene.instantiate()  # Instantiate a new jetpack item
 		if item:
-			item.position = spawn_position  # Set the position for the item
+			item.position = spawn_position  # Set the randomized position
 			add_child(item)  # Add the item to the scene
 			items.append(item)  # Add the item to the list of items
-			#print("Item spawned successfully at: ", spawn_position)
-		#else:
-			#print("Failed to instantiate item. Check jetpack_scene.")
-	#else:
-		#print("Spawn chance failed. No item spawned.")
-
+			
 func get_highest_item_y() -> float:
 	# Returns the Y position of the highest item in the scene or -INF if no items exist
 	if items.is_empty():

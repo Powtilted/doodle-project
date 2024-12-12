@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var gravity = 800
-var jump_strength = -650
+var jump_strength = -675
 var move_speed = 600
 var critical_fall_speed = 1000  # Adjust this value based on desired speed threshold
 var is_dead = false  # Flag to track if the player is already dead
@@ -18,9 +18,36 @@ var is_dead = false  # Flag to track if the player is already dead
 @onready var falling_death_sound = $FallingDeathSound
 @onready var shoot_sound = $ShootSound  
 @onready var jetpack_sound = $jetpack_sound
+@export var backgrounds: Array[Texture] = []
+
+var current_background = 0
+var score_interval = 300
+var thing = 0
+
 
 func _ready():
 	add_to_group("player")
+	current_background = 0
+	
+func check_background_change():
+	#if ScoreManager.score % (score_interval+1%(thing + 1)) == 0:
+		#print("Score:", ScoreManager.score)
+		#print("bck", current_background)
+		#change_background()
+	if ScoreManager.score >= (thing+ 1) * score_interval:
+		print("Score:", ScoreManager.score)
+		print("bck", current_background)
+		change_background()
+
+func change_background():
+	if current_background < backgrounds.size():
+		$"../ParallaxBackground/ParallaxLayer/Sprite2D".texture = backgrounds[current_background]
+		current_background += 1
+		thing +=1
+	else:
+		 #current_background >= backgrounds.size():
+		current_background = 0
+		#score_interval *= 2
 
 func wrapping_screen():
 	position.x = wrapf(position.x, 0, view_size.x)
@@ -30,6 +57,7 @@ func _process(delta):
 		return  # Prevent further processing if the player is dead
 
 	wrapping_screen()
+	check_background_change()
 	velocity.y += gravity * delta
 
 	if velocity.y > critical_fall_speed:

@@ -5,7 +5,7 @@ var sliding_platform_scene = preload("res://SlidingPlatform.tscn")
 var disappearing_platform_scene = preload("res://DisappearingPlatform.tscn")
 
 var initial_offset = 50
-var platform_spacing = 65
+var platform_spacing = 60
 var platforms = []
 
 func _ready():
@@ -14,7 +14,7 @@ func _ready():
 
 func _process(_delta):
 	var player = get_tree().current_scene.get_node("Player")
-	if player:
+	if player: 
 		# Spawn new platforms above the screen as needed
 		if get_highest_platform_y() > player.position.y - get_viewport_rect().size.y:
 			spawn_platform(Vector2(0, player.position.y - get_viewport_rect().size.y - platform_spacing))
@@ -46,7 +46,7 @@ func spawn_platform(spawn_position = Vector2()):
 	elif platform_scene != null:
 		platform = platform_scene.instantiate()
 	else:
-		print("Error: No platform scene assigned!")
+		#print("Error: No platform scene assigned!")
 		return
 
 	# Place the platform and add to the scene
@@ -81,12 +81,12 @@ func cleanup_platforms_below_player(player):
 		var platform = platforms[i]
 
 		if !is_instance_valid(platform):  # Skip invalid platforms
-			print("Skipping invalid platform reference.")
+			#print("Skipping invalid platform reference.")
 			platforms.remove_at(i)
 			continue
 
 		# Remove platform if it's below the player's threshold
 		if platform.position.y > threshold_y:
-			print("Removing platform at position:", platform.position)
+			#print("Removing platform at position:", platform.position)
 			platforms.remove_at(i)
 			platform.queue_free()
